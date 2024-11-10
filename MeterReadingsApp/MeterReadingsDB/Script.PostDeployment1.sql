@@ -1,0 +1,8 @@
+﻿IF NOT EXISTS (SELECT 1 FROM [dbo].[Account])
+BEGIN
+	BULK INSERT [dbo].[Account]
+	FROM ''
+	WITH(FIRSTROW = 2,
+		FIELDTERMINATOR = ',',
+		ROWTERMINATOR = '\n')
+END

@@ -1,0 +1,55 @@
+<div class="container">
+
+  <h1>ENSEK Meter Readings File Uploader</h1>
+
+  <div class="card mb-3">
+
+    <div class="card-header">
+
+      Uploader
+
+    </div>
+
+    <div class="card-body">
+      <form [formGroup]="myForm" (ngSubmit)="submit()">
+            
+        <div class="form-group">
+            <label for="file">File</label>
+            <input [accept]="'.csv'" formControlName="file" id="file" type="file" class="form-control mb-3" (change)="onFileChange($event)">
+
+            <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger mb-3">
+                <div *ngIf="f['file'].errors && f['file'].errors['required']">
+                File is required.
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" [disabled]="myForm.invalid" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="card">
+
+    <div class="card-header">
+      Results
+    </div>
+
+    <div class="card-body">
+      <div *ngIf="success" class="alert alert-success">
+        Upload Successful!
+      </div>
+
+      <div *ngIf="uploadError" class="alert alert-danger">
+        Error: {{uploadErrorDetails}}
+      </div>
+
+      <div>
+        <label>Successful Readings: {{uploadResults.successfulReadings}}</label>
+      </div>
+      <div>
+        <label>Failed Readings: {{uploadResults.failedReadings}}</label>
+      </div>
+    </div>
+</div>
+
